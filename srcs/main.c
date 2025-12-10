@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:15:32 by thlibers          #+#    #+#             */
-/*   Updated: 2025/12/09 17:30:14 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/12/10 11:34:29 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	main(int argc, char **argv, char **envp)
 	if (parse_args(argc, argv, &pipex) == -1)
 	{
 		cleanup_pipex(&pipex);
-		print_error("parsing error");
+		print_error("Parsing failed");
 	}
 	pipex.envp = envp;
-	execute_pipex(&pipex, argc);
+	execute_pipex(&pipex);
 	cleanup_pipex(&pipex);
 	return (0);
 }

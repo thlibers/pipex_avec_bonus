@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:27:39 by thlibers          #+#    #+#             */
-/*   Updated: 2025/12/09 17:53:07 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/12/10 10:10:30 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@
 
 typedef struct s_pipex
 {
+	char	***cmd_args;
+	char	**argv;
+	char	**envp;
+	char	**cmd_paths;
+	int		**pipe_fd;
 	int		infile_fd;
 	int		outfile_fd;
-	int		**pipe_fd;
-	char	**envp;
-	char	***cmd_args;
-	char	**cmd_paths;
+	int		argc;
 	int		cmd_count;
 	int		index;
 }			t_pipex;
@@ -44,7 +46,7 @@ char		**parse_command(char *cmd_str);
 char		*find_command_path(char *cmd, char **envp);
 
 // Execution.c
-void		execute_pipex(t_pipex *pipex, int argc);
+void		execute_pipex(t_pipex *pipex);
 
 // utils.c
 void		cleanup_pipex(t_pipex *pipex);

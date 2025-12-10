@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:22:25 by thlibers          #+#    #+#             */
-/*   Updated: 2025/12/09 17:29:24 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/12/10 11:56:22 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 void	print_error(char *message)
 {
-	ft_putstr_fd("Error\n", 2);
-	ft_putstr_fd(message, 2);
-	ft_putchar_fd('\n', 2);
+	ft_putstr_fd("Error : ", 2);
+	ft_putendl_fd(message, 2);
 	exit(1);
 }
 
@@ -35,26 +34,26 @@ void	free_array(char **array)
 	free(array);
 }
 
-static void	free_argsnpath(t_pipex *pipex)
-{
-	int	i;
+// static void	free_argsnpath(t_pipex *pipex)
+// {
+// 	int	i;
 
-	i = 0;
-	while (i < pipex->cmd_count)
-	{
-		if (pipex->cmd_args[i])
-		{
-			free_array(pipex->cmd_args[i]);
-			pipex->cmd_args[i] = NULL;
-		}
-		if (pipex->cmd_paths[i])
-		{
-			free(pipex->cmd_paths[i]);
-			pipex->cmd_paths[i] = NULL;
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < pipex->cmd_count)
+// 	{
+// 		if (pipex->cmd_args[i])
+// 		{
+// 			free_array(pipex->cmd_args[i]);
+// 			pipex->cmd_args[i] = NULL;
+// 		}
+// 		if (pipex->cmd_paths[i])
+// 		{
+// 			free(pipex->cmd_paths[i]);
+// 			pipex->cmd_paths[i] = NULL;
+// 		}
+// 		i++;
+// 	}
+// }
 
 void	cleanup_pipex(t_pipex *pipex)
 {
@@ -87,6 +86,6 @@ void	cleanup_pipex(t_pipex *pipex)
 		}
 		i++;
 	}
-	free_argsnpath(pipex);
+	// free_argsnpath(pipex);
 	pipex->envp = NULL;
 }

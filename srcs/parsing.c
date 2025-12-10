@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:18:25 by thlibers          #+#    #+#             */
-/*   Updated: 2025/12/09 18:19:59 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/12/10 11:34:43 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,30 @@ char	**parse_command(char *cmd_str)
 	return (arguments);
 }
 
+static int	init_parsing(t_pipex *pipex, int argc, char **argv)
+{
+	pipex->argc = argc;
+	pipex->argv = argv;
+	pipex->cmd_count = argc - 3;
+	pipex->infile_fd = open_infile(pipex->argv[1]);
+	if (pipex->infile_fd == -1)
+		return (0);
+	pipex->outfile_fd = open_outfile(pipex->argv[4]);
+	if (pipex->outfile_fd == -1)
+		return (close(pipex->infile_fd), 0);
+	pipex->cmd_args = malloc(sizeof(char **) * (pipex->cmd_count + 1));
+	if (!pipex->cmd_args)
+		return (0);
+	return (1);
+}
+
 int	parse_args(int argc, char **argv, t_pipex *pipex)
 {
 	int	i;
 
-	ft_memset(pipex, 0, sizeof(t_pipex));
-	pipex->cmd_count = argc - 3;
-	printf("%d\n", pipex->cmd_count);
-	pipex->infile_fd = open_infile(argv[1]);
-	if (pipex->infile_fd == -1)
-		return (0);
-	pipex->outfile_fd = open_outfile(argv[4]);
-	if (pipex->outfile_fd == -1)
-		return (close(pipex->infile_fd), 0);
 	i = 0;
-	pipex->cmd_args = malloc(sizeof(char **) * (pipex->cmd_count + 1));
-	if (!pipex->cmd_args)
+	ft_memset(pipex, 0, sizeof(t_pipex));
+	if (!init_parsing(pipex, argc, argv))
 		return (0);
 	while (i < pipex->cmd_count)
 	{
