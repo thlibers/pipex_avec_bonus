@@ -3,7 +3,7 @@ NAME = pipex
 
 # Flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g3 -I.
 INCLUDES = -I./includes -I./mylibft
 
 # Paths
@@ -18,6 +18,7 @@ SRCS = $(SRC_DIR)/main.c\
 	$(SRC_DIR)/commands.c\
 	$(SRC_DIR)/execution.c\
 	$(SRC_DIR)/parsing.c\
+	$(SRC_DIR)/child.c\
 	$(SRC_DIR)/utils.c
 
 # Obj

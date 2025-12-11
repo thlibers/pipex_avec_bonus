@@ -1,5 +1,0 @@
-- faire une fonction qui qui va chercher le dernier enfant pour return son status (waitpid)
-- faire le here doc et gerer les << >>
-
-// > efface le fichier et met le contenu 		et >> ajoute le contenu
-// < lire dans un fichier						et << heredoc (fichier temp)

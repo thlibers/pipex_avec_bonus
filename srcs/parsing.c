@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:18:25 by thlibers          #+#    #+#             */
-/*   Updated: 2025/12/10 11:34:43 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/11 12:47:27 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ static int	init_parsing(t_pipex *pipex, int argc, char **argv)
 	pipex->argv = argv;
 	pipex->cmd_count = argc - 3;
 	pipex->infile_fd = open_infile(pipex->argv[1]);
-	if (pipex->infile_fd == -1)
+	if (pipex->infile_fd == 0)
 		return (0);
-	pipex->outfile_fd = open_outfile(pipex->argv[4]);
-	if (pipex->outfile_fd == -1)
-		return (close(pipex->infile_fd), 0);
+	pipex->outfile_fd = open_outfile(argv[argc - 1]);
+	if (pipex->outfile_fd == 0)
+		return (0);
 	pipex->cmd_args = malloc(sizeof(char **) * (pipex->cmd_count + 1));
 	if (!pipex->cmd_args)
 		return (0);
@@ -80,7 +80,6 @@ int	parse_args(int argc, char **argv, t_pipex *pipex)
 	int	i;
 
 	i = 0;
-	ft_memset(pipex, 0, sizeof(t_pipex));
 	if (!init_parsing(pipex, argc, argv))
 		return (0);
 	while (i < pipex->cmd_count)
@@ -97,4 +96,3 @@ int	parse_args(int argc, char **argv, t_pipex *pipex)
 	pipex->cmd_args[i] = NULL;
 	return (1);
 }
-

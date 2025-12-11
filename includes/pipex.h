@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:27:39 by thlibers          #+#    #+#             */
-/*   Updated: 2025/12/10 16:42:35 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/12/11 12:34:42 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char		*find_command_path(char *cmd, char **envp);
 
 // Execution.c
 void		execute_pipex(t_pipex *pipex);
+void		child_process(t_pipex *pipex, int cmd_count);
 
 // utils.c
 void		cleanup_pipex(t_pipex *pipex);
