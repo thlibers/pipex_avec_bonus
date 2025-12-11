@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 12:30:53 by nclavel           #+#    #+#             */
-/*   Updated: 2025/12/11 12:35:39 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/11 13:39:51 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	first_last_command(t_pipex *pipex, int cmd_count)
 			print_error("dup2 failed for outfile");
 		close(pipex->infile_fd);
 		close(pipex->pipe_fd[cmd_count][1]);
-    	close(pipex->pipe_fd[cmd_count][0]);
+		close(pipex->pipe_fd[cmd_count][0]);
 	}
 	else if (cmd_count == pipex->cmd_count - 1)
 	{
@@ -38,14 +38,14 @@ static void	first_last_command(t_pipex *pipex, int cmd_count)
 
 static void	setup_middle_command(t_pipex *pipex, int cmd_count)
 {
-    if (dup2(pipex->pipe_fd[cmd_count - 1][0], STDIN_FILENO) == -1)
-        print_error("dup2 failed for pipe read");
-    if (dup2(pipex->pipe_fd[cmd_count][1], STDOUT_FILENO) == -1)
-        print_error("dup2 failed for pipe write");
-    close(pipex->pipe_fd[cmd_count - 1][0]);
-    close(pipex->pipe_fd[cmd_count - 1][1]);
-    close(pipex->pipe_fd[cmd_count][0]);
-    close(pipex->pipe_fd[cmd_count][1]);
+	if (dup2(pipex->pipe_fd[cmd_count - 1][0], STDIN_FILENO) == -1)
+		print_error("dup2 failed for pipe read");
+	if (dup2(pipex->pipe_fd[cmd_count][1], STDOUT_FILENO) == -1)
+		print_error("dup2 failed for pipe write");
+	close(pipex->pipe_fd[cmd_count - 1][0]);
+	close(pipex->pipe_fd[cmd_count - 1][1]);
+	close(pipex->pipe_fd[cmd_count][0]);
+	close(pipex->pipe_fd[cmd_count][1]);
 }
 
 static void	init_child(t_pipex *pipex, int cmd_count)
@@ -61,19 +61,19 @@ static void	init_child(t_pipex *pipex, int cmd_count)
 	while (i < pipex->cmd_count - 1)
 	{
 		if (i != cmd_count - 1 && i != cmd_count)
-        {
-            close(pipex->pipe_fd[i][0]);
-            close(pipex->pipe_fd[i][1]);
-        }
+		{
+			close(pipex->pipe_fd[i][0]);
+			close(pipex->pipe_fd[i][1]);
+		}
 		i++;
 	}
 }
 
 void	child_process(t_pipex *pipex, int cmd_count)
 {
-	char *cmd_path;
-	int	i;
-	
+	char	*cmd_path;
+	int		i;
+
 	i = 0;
 	init_child(pipex, cmd_count);
 	cmd_path = find_command_path(pipex->cmd_args[cmd_count][0], pipex->envp);
