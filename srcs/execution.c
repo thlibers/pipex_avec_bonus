@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:22:08 by thlibers          #+#    #+#             */
-/*   Updated: 2025/12/11 13:39:44 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/12 08:38:57 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,19 @@ static void	pipes_creation(t_pipex *pipex)
 	{
 		if (pipe(pipex->pipe_fd[i]) == -1)
 			print_error("Pipe creation failed");
+		i++;
+	}
+}
+
+static void	pipes_close(t_pipex *pipex)
+{
+	int	i;
+
+	i = 0;
+	while (i < pipex->cmd_count - 1)
+	{
+		close(pipex->pipe_fd[i][0]);
+		close(pipex->pipe_fd[i][1]);
 		i++;
 	}
 }
@@ -57,6 +70,7 @@ void	execute_pipex(t_pipex *pipex)
 		print_error("Allocation Pipe_fd array failed");
 	pipes_creation(pipex);
 	children_creation(pipex, pid);
+	pipes_close(pipex);
 	while (i < pipex->cmd_count)
 	{
 		waitpid(pid[i], &status, 0);

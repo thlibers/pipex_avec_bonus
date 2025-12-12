@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:27:39 by thlibers          #+#    #+#             */
-/*   Updated: 2025/12/11 12:34:42 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/12 08:58:49 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <stdbool.h>
 
 typedef struct s_pipex
 {
@@ -33,6 +34,7 @@ typedef struct s_pipex
 	int		argc;
 	int		cmd_count;
 	int		index;
+	bool	heredoc;
 }			t_pipex;
 
 // parsing.c
