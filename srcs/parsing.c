@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:18:25 by thlibers          #+#    #+#             */
-/*   Updated: 2025/12/12 09:00:07 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/15 11:38:28 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ static int	init_parsing(t_pipex *pipex, int argc, char **argv)
 	pipex->argc = argc;
 	pipex->argv = argv;
 	pipex->cmd_count = argc - 3;
+	if (argc < 4)
+		return(0);
 	pipex->infile_fd = open_infile(pipex->argv[1]);
 	if (pipex->infile_fd == 0)
 		return (0);

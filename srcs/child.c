@@ -6,11 +6,23 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 12:30:53 by nclavel           #+#    #+#             */
-/*   Updated: 2025/12/11 13:39:51 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/15 11:59:53 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/pipex.h"
+
+static void	one_command_only(t_pipex *pipex, int cmd_count)
+{
+	if (dup2(pipex->infile_fd, STDIN_FILENO) == -1)
+		print_error("dup2 failed for pipe read");
+	if (dup2(pipex->outfile_fd, STDOUT_FILENO) == -1)
+		print_error("dup2 failed for outfile");
+	close(pipex->infile_fd);
+	close(pipex->outfile_fd);
+	close(pipex->pipe_fd[cmd_count][0]);
+	close(pipex->pipe_fd[cmd_count][1]);
+}
 
 static void	first_last_command(t_pipex *pipex, int cmd_count)
 {
@@ -53,7 +65,9 @@ static void	init_child(t_pipex *pipex, int cmd_count)
 	int	i;
 
 	i = 0;
-	if (cmd_count == 0 || cmd_count == pipex->cmd_count - 1)
+	if (cmd_count == 0 && cmd_count == pipex->cmd_count - 1)
+		one_command_only(pipex, cmd_count);
+	else if (cmd_count == 0 || cmd_count == pipex->cmd_count - 1)
 		first_last_command(pipex, cmd_count);
 	else
 		setup_middle_command(pipex, cmd_count);

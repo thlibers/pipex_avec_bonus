@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:20:34 by thlibers          #+#    #+#             */
-/*   Updated: 2025/12/11 12:22:48 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/15 11:08:58 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static char	*build_path(char *cmd, char **paths)
 		free(tmp);
 		if (!full_path)
 			return (free_array(paths), NULL);
+		printf("%s\n", full_path);
 		if (access(full_path, X_OK) == 0)
 			return (full_path);
 		free(full_path);

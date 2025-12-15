@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:15:32 by thlibers          #+#    #+#             */
-/*   Updated: 2025/12/11 12:05:27 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/15 11:38:11 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv, char **envp)
 	t_pipex	pipex;
 
 	ft_memset(&pipex, 0, sizeof(t_pipex));
-	if (parse_args(argc, argv, &pipex) == -1)
+	if (!parse_args(argc, argv, &pipex))
 	{
 		cleanup_pipex(&pipex);
 		print_error("Parsing failed");
