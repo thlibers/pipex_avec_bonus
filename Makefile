@@ -19,7 +19,8 @@ SRCS = $(SRC_DIR)/main.c\
 	$(SRC_DIR)/execution.c\
 	$(SRC_DIR)/parsing.c\
 	$(SRC_DIR)/child.c\
-	$(SRC_DIR)/utils.c
+	$(SRC_DIR)/utils.c\
+	$(SRC_DIR)/heredoc.c
 
 # Obj
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

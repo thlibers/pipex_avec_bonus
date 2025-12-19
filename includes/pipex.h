@@ -28,13 +28,14 @@ typedef struct s_pipex
 	char	***cmd_args;
 	char	**argv;
 	char	**envp;
+	char	*limiter;
 	int		(*pipe_fd)[2];
 	int		infile_fd;
 	int		outfile_fd;
 	int		argc;
 	int		cmd_count;
 	int		index;
-	bool	heredoc;
+	int		heredoc;
 }			t_pipex;
 
 // parsing.c
@@ -49,6 +50,7 @@ char		*find_command_path(char *cmd, char **envp);
 // Execution.c
 void		execute_pipex(t_pipex *pipex);
 void		child_process(t_pipex *pipex, int cmd_count);
+int			here_doc(t_pipex *pipex);
 
 // utils.c
 void		cleanup_pipex(t_pipex *pipex);

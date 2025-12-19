@@ -17,12 +17,17 @@ int	main(int argc, char **argv, char **envp)
 	t_pipex	pipex;
 
 	ft_memset(&pipex, 0, sizeof(t_pipex));
+	pipex.envp = envp;
 	if (!parse_args(argc, argv, &pipex))
 	{
 		cleanup_pipex(&pipex);
 		print_error("Parsing failed");
 	}
-	pipex.envp = envp;
+	if (pipex.limiter)
+	{
+		here_doc(&pipex);
+		return (0);
+	}
 	execute_pipex(&pipex);
 	cleanup_pipex(&pipex);
 	return (0);

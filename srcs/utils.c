@@ -63,6 +63,8 @@ void	cleanup_pipex(t_pipex *pipex)
 		(close(pipex->infile_fd), pipex->infile_fd = -1);
 	if (pipex->outfile_fd > 2)
 		(close(pipex->outfile_fd), pipex->outfile_fd = -1);
+	if (pipex->limiter)
+		free(pipex->limiter);
 	while (i < pipex->cmd_count)
 	{
 		if (pipex->pipe_fd[i][0] > 2)

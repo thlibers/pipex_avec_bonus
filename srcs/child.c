@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 12:30:53 by nclavel           #+#    #+#             */
-/*   Updated: 2025/12/15 11:59:53 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/19 09:49:04 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	init_child(t_pipex *pipex, int cmd_count)
 	int	i;
 
 	i = 0;
-	if (cmd_count == 0 && cmd_count == pipex->cmd_count - 1)
+	if ((cmd_count == 0 && cmd_count == pipex->cmd_count - 1) && !pipex->heredoc)
 		one_command_only(pipex, cmd_count);
 	else if (cmd_count == 0 || cmd_count == pipex->cmd_count - 1)
 		first_last_command(pipex, cmd_count);
@@ -86,9 +86,7 @@ static void	init_child(t_pipex *pipex, int cmd_count)
 void	child_process(t_pipex *pipex, int cmd_count)
 {
 	char	*cmd_path;
-	int		i;
 
-	i = 0;
 	init_child(pipex, cmd_count);
 	cmd_path = find_command_path(pipex->cmd_args[cmd_count][0], pipex->envp);
 	if (!cmd_path)
@@ -107,3 +105,4 @@ void	child_process(t_pipex *pipex, int cmd_count)
 	}
 	free(cmd_path);
 }
+
