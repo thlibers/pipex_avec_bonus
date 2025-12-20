@@ -1,0 +1,76 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+$(LIBFT):
+$(NAME): $(LIBFT) $(OBJS)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	$(SRC_DIR)/child.c\
+	$(SRC_DIR)/commands.c\
+	$(SRC_DIR)/execution.c\
+	$(SRC_DIR)/heredoc.c
+	$(SRC_DIR)/parsing.c\
+	$(SRC_DIR)/utils.c\
+all: $(NAME)
+BLUE = \033[0;34m
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -g3 -I.
+clean:
+# Clean obj files
+# Compilation files obj
+# Compilation mylibft
+# Compilation program
+# Complete clean
+# Complete recompilation
+	@echo "$(BLUE)Checking for memory leaks with valgrind...$(RESET)"
+	@echo "$(BLUE)Compiling $<...$(RESET)"
+	@echo "$(BLUE)Compiling libft...$(RESET)"
+	@echo "$(BLUE)Linking $(NAME)...$(RESET)"
+	@echo "$(GREEN)✓ $(NAME) compiled successfully!$(RESET)"
+	@echo "$(GREEN)✓ Full clean completed!$(RESET)"
+	@echo "$(GREEN)✓ libft compiled!$(RESET)"
+	@echo "$(GREEN)✓ Object files cleaned!$(RESET)"
+	@echo "$(RED)Cleaning executables...$(RESET)"
+	@echo "$(RED)Cleaning object files...$(RESET)"
+fclean: clean
+# Flags
+GREEN = \033[0;32m
+INCLUDES = -I./includes -I./mylibft
+# Leaks
+LIBFT = $(LIBFT_DIR)/libft.a
+LIBFT_DIR = mylibft
+	@make -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR) clean
+	@make -C $(LIBFT_DIR) fclean
+	@mkdir -p $(dir $@)
+# Name
+NAME = pipex
+# Obj
+OBJ_DIR = objs
+OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+# Paths
+.PHONY: all clean fclean re test leaks valgrind
+RED = \033[0;31m
+re: fclean all
+RESET = \033[0m
+	@rm -f $(NAME)
+	@rm -rf $(OBJ_DIR)
+# Rule .PHONY
+SRC_DIR = srcs
+# Srcs
+SRCS = $(SRC_DIR)/main.c\
+valgrind: $(NAME)
+	@valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) maps/valid_map.ber

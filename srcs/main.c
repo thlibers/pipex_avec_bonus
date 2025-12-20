@@ -26,7 +26,6 @@ int	main(int argc, char **argv, char **envp)
 	if (pipex.limiter)
 	{
 		here_doc(&pipex);
-		return (0);
 	}
 	execute_pipex(&pipex);
 	cleanup_pipex(&pipex);

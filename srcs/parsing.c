@@ -92,7 +92,7 @@ int	parse_args(int argc, char **argv, t_pipex *pipex)
 	i = 0;
 	if (!init_parsing(pipex, argc, argv))
 		return (0);
-	while (i < pipex->cmd_count)
+	while (i < pipex->cmd_count - pipex->heredoc)
 	{
 		pipex->cmd_args[i] = parse_command(argv[i + pipex->heredoc + 2]);
 		if (!pipex->cmd_args[i])
