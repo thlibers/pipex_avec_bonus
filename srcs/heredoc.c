@@ -14,9 +14,9 @@
 
 char  *modded_join(char *s1, char *s2)
 {
-	int	i;
-	int	j;
-	char *str;
+	int	  i;
+	int	  j;
+	char  *str;
 
 	i = 0;
 	j = 0;
@@ -49,6 +49,8 @@ char  *get_line(void)
 	bytes_read = 1;
 	line = NULL;
 	buff = malloc(sizeof(char) * (10 + 1));
+	if (!buff)
+		return (NULL);
 	while (!ft_strchr(buff, '\n') && bytes_read > 0)
 	{
 		bytes_read = read(0, buff, 10);
@@ -59,28 +61,52 @@ char  *get_line(void)
 		}
 		buff[bytes_read] = '\0';
 		line = modded_join(line, buff);
+		if (!line)
+		{
+			free(buff);
+			return (NULL);
+		}
 	}
 	free(buff);
 	return (line);
+}
+
+static int	heredoc_init(t_pipex *pipex)
+{
+	pipex->infile_fd = open("/tmp/pipex_heredoc.tmp", O_WRONLY | O_CREAT | O_TRUNC, 00644);
+	if (pipex->infile_fd < 0)
+	{
+		cleanup_pipex(pipex);
+		print_error("Failed to open/create/erase tmp file");
+	}
+	return (0);
 }
 
 int	here_doc(t_pipex *pipex)
 {
 	char  *line;
 
-	pipex->infile_fd = open("/tmp/pipex_heredoc.tmp", O_RDWR | O_CREAT | O_TRUNC, 0777);
-	if (!pipex->infile_fd)
-		return 1;
+	line = NULL;
+	heredoc_init(pipex);
 	while (1)
 	{
 		if (line)
 			free(line);
 		write(1, "> ", 2);
 		line = get_line();
+		if (!line)
+		{
+			cleanup_pipex(pipex);
+			print_error("Heredoc failed");
+		}
 		if (ft_strnstr(line, pipex->limiter, ft_strlen(line)))
 			break ;
 		ft_putstr_fd(line, pipex->infile_fd);
 	}
+	close(pipex->infile_fd);
+	pipex->infile_fd = open("/tmp/pipex_heredoc.tmp", O_RDONLY);
+	if (pipex->infile_fd < 0)
+		print_error("Failed to reopen heredoc file for reading");
 	free(line);
 	return (0);
 }

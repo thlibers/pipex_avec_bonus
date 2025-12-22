@@ -65,9 +65,11 @@ static void	init_child(t_pipex *pipex, int cmd_count)
 	int	i;
 
 	i = 0;
-	if ((cmd_count == 0 && cmd_count == pipex->cmd_count - 1) && !pipex->heredoc)
+	if ((cmd_count == 0 && cmd_count == pipex->cmd_count - 1)
+		&& !pipex->heredoc)
 		one_command_only(pipex, cmd_count);
-	else if (cmd_count == 0 || cmd_count == pipex->cmd_count - pipex->heredoc - 1)
+	else if (cmd_count == 0
+		|| cmd_count == pipex->cmd_count - pipex->heredoc - 1)
 		first_last_command(pipex, cmd_count);
 	else
 		setup_middle_command(pipex, cmd_count);
@@ -105,4 +107,3 @@ void	child_process(t_pipex *pipex, int cmd_count)
 	}
 	free(cmd_path);
 }
-

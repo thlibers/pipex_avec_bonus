@@ -64,7 +64,7 @@ static int	init_parsing(t_pipex *pipex, int argc, char **argv)
 	pipex->argv = argv;
 	pipex->cmd_count = argc - 3;
 	if (argc < 4)
-		return(0);
+		return (0);
 	if ((ft_strncmp(argv[1], "here_doc", ft_strlen(pipex->argv[1]))) == 0)
 	{
 		pipex->limiter = ft_strdup(argv[2]);

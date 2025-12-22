@@ -24,9 +24,7 @@ int	main(int argc, char **argv, char **envp)
 		print_error("Parsing failed");
 	}
 	if (pipex.limiter)
-	{
 		here_doc(&pipex);
-	}
 	execute_pipex(&pipex);
 	cleanup_pipex(&pipex);
 	return (0);
