@@ -64,7 +64,7 @@ static int	init_parsing(t_pipex *pipex, int argc, char **argv)
 	pipex->argv = argv;
 	pipex->cmd_count = argc - 3;
 	if (argc < 4)
-		return(0);
+		return (0);
 	if ((ft_strncmp(argv[1], "here_doc", ft_strlen(pipex->argv[1]))) == 0)
 	{
 		pipex->limiter = ft_strdup(argv[2]);
@@ -92,7 +92,7 @@ int	parse_args(int argc, char **argv, t_pipex *pipex)
 	i = 0;
 	if (!init_parsing(pipex, argc, argv))
 		return (0);
-	while (i < pipex->cmd_count)
+	while (i < pipex->cmd_count - pipex->heredoc)
 	{
 		pipex->cmd_args[i] = parse_command(argv[i + pipex->heredoc + 2]);
 		if (!pipex->cmd_args[i])

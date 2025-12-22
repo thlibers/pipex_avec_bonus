@@ -1,3 +1,0 @@
-./pipex infile "ls -al" "head -1" "wc -l" outfile 
-
-./pipex infile "ls -al" "awk '{print $9}'" "wc -l" askdhsahkdbs/outfile

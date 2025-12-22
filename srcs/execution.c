@@ -34,6 +34,8 @@ static void	pipes_close(t_pipex *pipex)
 	{
 		close(pipex->pipe_fd[i][0]);
 		close(pipex->pipe_fd[i][1]);
+		pipex->pipe_fd[i][0] = -1;
+		pipex->pipe_fd[i][1] = -1;
 		i++;
 	}
 }
