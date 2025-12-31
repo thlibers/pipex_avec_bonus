@@ -70,7 +70,7 @@ re: fclean all
 # Leaks
 valgrind: $(NAME)
 	@echo "$(BLUE)Checking for memory leaks with valgrind...$(RESET)"
-	@valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) maps/valid_map.ber
+	@valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
 
 # Rule .PHONY
 .PHONY: all clean fclean re test leaks valgrind

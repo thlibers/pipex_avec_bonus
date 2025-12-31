@@ -23,6 +23,10 @@
 # include <stdio.h>
 # include <stdbool.h>
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+
 typedef struct s_pipex
 {
 	char	***cmd_args;
