@@ -62,14 +62,14 @@ static int	init_parsing(t_pipex *pipex, int argc, char **argv)
 {
 	pipex->argc = argc;
 	pipex->argv = argv;
-	pipex->cmd_count = argc - 2;
+	pipex->cmd_count = argc - 3;
 	if (argc < 4)
 		return (0);
 	if ((ft_strncmp(argv[1], "here_doc", ft_strlen(pipex->argv[1]))) == 0)
 	{
 		pipex->limiter = ft_strdup(argv[2]);
 		pipex->heredoc = 1;
-		pipex->cmd_count -= 1;
+    pipex->cmd_count -= 1;
 	}
 	else
 	{
@@ -83,6 +83,7 @@ static int	init_parsing(t_pipex *pipex, int argc, char **argv)
 	pipex->cmd_args = malloc(sizeof(char **) * (pipex->cmd_count + 1));
 	if (!pipex->cmd_args)
 		return (0);
+  printf("%d ; %d\n", pipex->cmd_count, argc);
 	return (1);
 }
 
@@ -93,7 +94,7 @@ int	parse_args(int argc, char **argv, t_pipex *pipex)
 	i = 0;
 	if (!init_parsing(pipex, argc, argv))
 		return (0);
-	while (i < pipex->cmd_count - pipex->heredoc)
+	while (i < pipex->cmd_count)
 	{
 		pipex->cmd_args[i] = parse_command(argv[i + pipex->heredoc + 2]);
 		if (!pipex->cmd_args[i])

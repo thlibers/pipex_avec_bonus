@@ -45,7 +45,7 @@ static void	children_creation(t_pipex *pipex, pid_t *pid)
 	int	i;
 
 	i = 0;
-	while (i < pipex->cmd_count - 1)
+	while (i < pipex->cmd_count)
 	{
 		pid[i] = fork();
 		if (pid[i] == -1)
@@ -65,7 +65,7 @@ void	execute_pipex(t_pipex *pipex)
 
 	i = 0;
 	pid = NULL;
-	pid = ft_calloc(pipex->cmd_count - 1, sizeof(int));
+	pid = ft_calloc(pipex->cmd_count, sizeof(int));
 	if (!pid)
 		print_error("Allocation pid array failed");
 	pipex->pipe_fd = ft_calloc(pipex->cmd_count, sizeof(int *));
