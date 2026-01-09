@@ -57,6 +57,12 @@ static void	children_creation(t_pipex *pipex, pid_t *pid)
 	}
 }
 
+void test(void)
+{
+	t_pipex pipex;
+	pipes_close(&pipex);
+}
+
 void	execute_pipex(t_pipex *pipex)
 {
 	pid_t	*pid;
@@ -74,7 +80,7 @@ void	execute_pipex(t_pipex *pipex)
 	pipes_creation(pipex);
 	children_creation(pipex, pid);
 	pipes_close(pipex);
-	while (i < pipex->cmd_count - 1)
+	while (i < pipex->cmd_count)
 	{
 		waitpid(pid[i], &status, 0);
 		i++;
