@@ -23,6 +23,8 @@
 # include <stdio.h>
 # include <stdbool.h>
 
+# define FTMP_NAME "/tmp/pipex_heredoc.tmp"
+
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 # endif

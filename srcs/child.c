@@ -32,7 +32,6 @@ static void	first_last_command(t_pipex *pipex, int child_number)
 		if (dup2(pipex->pipe_fd[child_number][1], STDOUT_FILENO) == -1)
 			print_error("dup2 failed for outfile");
 		close(pipex->infile_fd);
-
 	}
 	else if (child_number == pipex->cmd_count - 1)
 	{

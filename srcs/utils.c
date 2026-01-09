@@ -14,9 +14,8 @@
 
 void	print_error(char *message)
 {
-	ft_putstr_fd("Error : ", 2);
-	ft_putendl_fd(message, 2);
-
+	ft_putstr_fd("Error : ", STDERR_FILENO);
+	ft_putendl_fd(message, STDERR_FILENO);
 	exit(1);
 }
 
