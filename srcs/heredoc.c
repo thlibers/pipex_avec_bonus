@@ -48,7 +48,7 @@ char  *get_line(void)
 
 	bytes_read = 1;
 	line = NULL;
-	buff = malloc(sizeof(char) * (10 + 1));
+	buff = ft_calloc(10 + 1, sizeof(char));
 	if (!buff)
 		return (NULL);
 	while (!ft_strchr(buff, '\n') && bytes_read > 0)
