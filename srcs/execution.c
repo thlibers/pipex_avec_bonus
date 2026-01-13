@@ -52,15 +52,8 @@ static void	children_creation(t_pipex *pipex, pid_t *pid)
 			print_error("Fork creation failed");
 		if (pid[i] == 0)
 			child_process(pipex, i);
-		printf("pid enfant %d : %d == cmd %s\n", i, pid[i], pipex->cmd_args[i][0]);
 		i++;
 	}
-}
-
-void test(void)
-{
-	t_pipex pipex;
-	pipes_close(&pipex);
 }
 
 void	execute_pipex(t_pipex *pipex)

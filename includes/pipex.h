@@ -13,6 +13,8 @@
 #ifndef PIPEX_H
 # define PIPEX_H
 
+# define HEREDOC_F "/tmp/pipex_heredoc.tmp"
+
 # include "../mylibft/libft.h"
 # include <fcntl.h>
 # include <limits.h>

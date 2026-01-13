@@ -12,11 +12,11 @@
 
 #include "includes/pipex.h"
 
-char  *modded_join(char *s1, char *s2)
+char	*modded_join(char *s1, char *s2)
 {
-	int	  i;
-	int	  j;
-	char  *str;
+	int		i;
+	int		j;
+	char	*str;
 
 	i = 0;
 	j = 0;
@@ -40,11 +40,11 @@ char  *modded_join(char *s1, char *s2)
 	return (str[i + j] = '\0', str);
 }
 
-char  *get_line(void)
+char	*get_line(void)
 {
-	char  *buff;
-	char  *line;
-	int	  bytes_read;
+	char	*buff;
+	char	*line;
+	int		bytes_read;
 
 	bytes_read = 1;
 	line = NULL;
@@ -62,10 +62,7 @@ char  *get_line(void)
 		buff[bytes_read] = '\0';
 		line = modded_join(line, buff);
 		if (!line)
-		{
-			free(buff);
-			return (NULL);
-		}
+			return (free(buff), NULL);
 	}
 	free(buff);
 	return (line);
@@ -73,7 +70,7 @@ char  *get_line(void)
 
 static int	heredoc_init(t_pipex *pipex)
 {
-	pipex->infile_fd = open("/tmp/pipex_heredoc.tmp", O_WRONLY | O_CREAT | O_TRUNC, 00644);
+	pipex->infile_fd = open(HEREDOC_F, O_WRONLY | O_CREAT | O_TRUNC, 00644);
 	if (pipex->infile_fd < 0)
 	{
 		cleanup_pipex(pipex);
@@ -84,7 +81,7 @@ static int	heredoc_init(t_pipex *pipex)
 
 int	here_doc(t_pipex *pipex)
 {
-	char  *line;
+	char	*line;
 
 	line = NULL;
 	heredoc_init(pipex);

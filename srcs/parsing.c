@@ -83,8 +83,6 @@ static int	init_parsing(t_pipex *pipex, int argc, char **argv)
 	pipex->cmd_args = malloc(sizeof(char **) * (pipex->cmd_count + 1));
 	if (!pipex->cmd_args)
 		return (0);
-	printf("cmd nb = %d ; argc = %d\n", pipex->cmd_count, argc);
-	printf("heredoc status = %d\n", pipex->heredoc);
 	return (1);
 }
 
@@ -105,4 +103,3 @@ int	parse_args(int argc, char **argv, t_pipex *pipex)
 	pipex->cmd_args[i] = NULL;
 	return (1);
 }
-
